@@ -1,0 +1,14 @@
+cd("/home/hugdiniz/Work/Workspace/ScheduleCrew.jl/example")
+function readDataSet()
+    return readcsv("dataset/dataset.csv")
+end
+
+dataset = readDataSet()
+
+function verify(a)
+    if a == " BASE2 "
+        return true
+    else
+        return false
+    end
+end

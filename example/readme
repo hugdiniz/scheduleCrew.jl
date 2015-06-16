@@ -1,0 +1,16 @@
+Dataset
+	dataset.csv
+	#leg_nb airport_dep date_dep hour_dep airport_arr date_arr hour_arr
+
+DatasetModified
+	datasetModified.csv
+	#id airports_init_fk airports_end_fk initMinutes endMinutes
+	
+	airports.csv
+	#id airports_name
+	
+	dates.csv
+	#id dates
+	
+
+
