@@ -1,24 +1,19 @@
 type Experiment
 
-	initFunction::Function
-
-	function Experiment(initFunction)
+	initType::InitSolution
+  runExperiment::Function
+  model::Model
+  metaheuristic::Metaheuristic
+	function Experiment(initType::InitSolution,metaheuristic::Metaheuristic,model::Model)
 		this = new()
-		this.initFunction = initFunction
+		this.initType = initType
+    this.model = model
+    this.metaheuristic = metaheuristic
+    this.runExperiment = function runExperiment()
+      initSolution = initType.createSolution(model)
 
-		return this
-	end
-
-end
-
-type ScheduleExperiment
-
-	initFunction::Function
-
-	function ScheduleExperiment(initFunction)
-		this = new()
-		this.initFunction = initFunction
-
+      return initSolution
+    end
 		return this
 	end
 

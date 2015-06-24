@@ -15,6 +15,7 @@ end
 
 
 model = Model(costFunction,dataset,numberCrews)
-solution = initSolution(model)
+tabuSearch = TabuSearch()
+scheduleInitSolution = ScheduleInitSolution()
 
-
+experiment = Experiment(scheduleInitSolution,tabuSearch,model)
