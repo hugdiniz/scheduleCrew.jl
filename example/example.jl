@@ -6,12 +6,15 @@ end
 dataMatrix = readDataSet("datasetModified/datasetModified.csv")
 dataset = Dataset(dataMatrix)
 numberCrews= 20
-model = Model(costCalc,dataset,st)
 
 
-function costCalc(edge,crew::Crew)
 
-
+function costFunction(edge,crew::Crew)
+    return crew.workTimes
 end
+
+
+model = Model(costFunction,dataset,numberCrews)
+solution = initSolution(model)
 
 

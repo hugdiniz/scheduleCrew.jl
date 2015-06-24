@@ -1,15 +1,25 @@
-abstract «Experiment»
+type Experiment
 
-type ScheduleExperiment <: Experiment
-       	
 	initFunction::Function
-	   	
-	function Schedule(initFunction)	
+
+	function Experiment(initFunction)
 		this = new()
 		this.initFunction = initFunction
-	       
+
 		return this
 	end
 
 end
 
+type ScheduleExperiment
+
+	initFunction::Function
+
+	function ScheduleExperiment(initFunction)
+		this = new()
+		this.initFunction = initFunction
+
+		return this
+	end
+
+end

@@ -1,13 +1,13 @@
 type Model
 	data::Dataset
-	costCalc::Function
+	costFunction::Function
     crews::Array
     numberCrews::Int
-	function Model(costCalc, data::Dataset,numberCrews::Int,crews = null)
+	function Model(costFunction, data::Dataset,numberCrews::Int,crews = null)
 		this = new()
         this.data = data
         this.numberCrews = numberCrews
-        this.costCalc = costCalc
+        this.costFunction = costFunction
         this.crews = Array(Crew, numberCrews)
         if (crews == null)
             for i = 1:numberCrews
