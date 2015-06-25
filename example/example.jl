@@ -21,3 +21,6 @@ scheduleSolution = ScheduleSolution()
 experiment = Experiment(scheduleSolution,tabuSearch,model)
 
 experiment.runExperiment()
+experiment.solution.cost()
+
+getBestCrewEdge(model,1,experiment.solution)
