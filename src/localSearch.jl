@@ -9,9 +9,9 @@ type LocalSearch <: Metaheuristic
 
 end
 
-#TODO: Issue #1
+
 function getBestCrewEdge(model::Model,edgeId,solution)
-    edge = model.dataset.getEdge(edgeId)
+    edge = model.data.getEdge(edgeId)
     initVertex =  edge[2]
     bestSolution = solution
     tempSolution = solution
@@ -22,4 +22,5 @@ function getBestCrewEdge(model::Model,edgeId,solution)
             bestSolution = tempSolution
         end
     end
+    return bestSolution
 end

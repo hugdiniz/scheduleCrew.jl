@@ -1,13 +1,14 @@
 type Crew
     workTimes::Int64
     id::Int64
-    vertex::Int64
-    function Crew(id::Int64,workTimes::Int64 = 0, vertex = null)
+    vertex
+    function Crew(id::Int64,workTimes = 0, vertex = null)
         this = new()
         this.id= int(id)
-        this.workTimes = workTimes
+        this.workTimes = Int64(workTimes)
+        this.vertex = vertex
         if vertex != null
-            this.vertex = int(vertex)
+            this.vertex = Int(vertex)
         end
         return this
     end
