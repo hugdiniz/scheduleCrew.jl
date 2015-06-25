@@ -9,13 +9,15 @@ numberCrews= 20
 
 
 
-function costFunction(edge,crew::Crew)
+function edgeCost(edge,crew::Crew)
     return crew.workTimes
 end
 
-
-model = Model(costFunction,dataset,numberCrews)
+staticVars = StaticVars(numberCrews)
+model = ScheduleCrewModel(edgeCost,dataset,staticVars)
 tabuSearch = TabuSearch()
-scheduleInitSolution = ScheduleInitSolution()
+scheduleSolution = ScheduleSolution()
 
-experiment = Experiment(scheduleInitSolution,tabuSearch,model)
+experiment = Experiment(scheduleSolution,tabuSearch,model)
+
+experiment.runExperiment()

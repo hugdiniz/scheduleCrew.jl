@@ -1,9 +1,9 @@
-module scheduleCrew
+
 include("dataset.jl")
+include("staticVars.jl")
 include("model.jl")
 include("crew.jl")
-include("staticVars.jl")
-include("initSolution.jl")
+include("solution.jl")
 include("metaheuristic.jl")
 include("experiment.jl")
-end
+

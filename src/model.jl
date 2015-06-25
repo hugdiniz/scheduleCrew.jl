@@ -1,13 +1,16 @@
-type Model
+abstract Model
+
+type ScheduleCrewModel <: Model
 	data::Dataset
-	costFunction::Function
+	edgeCost::Function
     crews::Array
     numberCrews::Int
-	function Model(costFunction, data::Dataset,numberCrews::Int,crews = null)
+    staticVars::StaticVars
+	function ScheduleCrewModel(edgeCost, data::Dataset,staticVars::StaticVars,crews = null)
 		this = new()
         this.data = data
-        this.numberCrews = numberCrews
-        this.costFunction = costFunction
+        this.staticVars = staticVars
+        this.edgeCost = edgeCost
         this.crews = Array(Crew, numberCrews)
         if (crews == null)
             for i = 1:numberCrews
