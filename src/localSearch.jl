@@ -13,7 +13,7 @@ function runMetaheuristic(model,solution)
     IterationNotImprovement = 1
     i = 1
     edgeSize = model.data.edgeSize()
-    while (IterationNotImprovement < edgeSize)
+    #while (IterationNotImprovement < edgeSize)
         edge = model.data.getEdge(i)
         edgeId = edge[1]
         ids = getBestCrewEdge(model,Int64(edgeId),solution)
@@ -34,7 +34,7 @@ function runMetaheuristic(model,solution)
         else
             i = 1
         end
-    end
+    #end
 end
 function getBestCrewEdge(model::Model,edgeId,solution)
     edge = model.data.getEdge(edgeId)
