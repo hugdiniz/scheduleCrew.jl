@@ -7,7 +7,7 @@ type Dataset
 		this = new()
         this.dataMatrix = dataMatrix
         this.getEdge = function getEdge(n)
-            return dataMatrix[n,:]
+            return dataMatrix[Int64(n),:]
         end
         this.edgeSize = function edgeSize()
             return length(dataMatrix[:,1])

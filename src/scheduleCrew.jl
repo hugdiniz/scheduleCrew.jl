@@ -1,4 +1,3 @@
-
 include("dataset.jl")
 include("staticVars.jl")
 include("model.jl")
