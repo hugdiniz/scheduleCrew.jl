@@ -5,7 +5,7 @@ end
 
 dataMatrix = readDataSet("datasetModified/datasetModified.csv")
 dataset = Dataset(dataMatrix)
-numberCrews= 50
+numberCrews= 60
 requiredPenalty = 1000000
 
 
@@ -15,13 +15,13 @@ function edgeCost(model,edge,crew::Crew)
     edgeIds = find(crew.workEdge)
     if(edge[1] != 1)
         index = findprev(crew.workEdge,Int64(edge[1] - 1))
-        if length(index) != 0
+        if length(index) != 0 && index != 0
             lastEdge = model.data.getEdge(crew.workEdge[index])
-            println("Last: ",lastEdge)
-            println("newEdge: ",edge)
-            if  lastEdge[3] != edge[2]
+            #println("Last: ",lastEdge)
+            #println("newEdge: ",edge)
+            if  lastEdge[2] != edge[3]
                 cost = cost + model.staticVars.requiredPenalty
-                println("Erro: ",lastEdge[3]," != ",edge[2])
+                #println("Erro: ",lastEdge[3]," != ",edge[2])
             end
         end
     end
@@ -42,4 +42,4 @@ es = experiment.runExperiment()
 #println("first:",initSolution[ids[1],:])
 #experiment.solution.setCrewId(ids[1],ids[2])
 #println("second:",initSolution[ids[1],:])
-#runMetaheuristic(model,experiment.solution)
+runMetaheuristic(model,experiment.solution)
