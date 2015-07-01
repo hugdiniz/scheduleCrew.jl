@@ -19,7 +19,7 @@ function edgeCost(model,edge,crew::Crew)
             lastEdge = model.data.getEdge(crew.workEdge[index])
             #println("Last: ",lastEdge)
             #println("newEdge: ",edge)
-            if  lastEdge[2] != edge[3]
+            if  lastEdge[3] != edge[2]
                 cost = cost + model.staticVars.requiredPenalty
                 #println("Erro: ",lastEdge[3]," != ",edge[2])
             end

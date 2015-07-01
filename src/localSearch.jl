@@ -10,10 +10,10 @@ type LocalSearch <: Metaheuristic
 end
 
 function runMetaheuristic(model,solution)
-    IterationNotImprovement = 1
+    iterationMax = 1
     i = 1
     edgeSize = model.data.edgeSize()
-    while (IterationNotImprovement < edgeSize)
+    while (iterationMax < (edgeSize*10))
         edge = model.data.getEdge(i)
         edgeId = edge[1]
         ids = getBestCrewEdge(model,Int64(edgeId),solution)
@@ -25,15 +25,13 @@ function runMetaheuristic(model,solution)
             experiment.solution.setCrewId(ids[1],ids[2])
             #println("New solution: ",solution.cost())
             println("New solution: ",costNewSolution(model,solution,ids[1],ids[2]))
-            IterationNotImprovement = 1
-        else
-            IterationNotImprovement = IterationNotImprovement + 1
         end
         if(edgeSize > i)
             i = i + 1
         else
             i = 1
         end
+        iterationMax = iterationMax + 1
     end
 end
 function getBestCrewEdge(model::Model,edgeId,solution)
