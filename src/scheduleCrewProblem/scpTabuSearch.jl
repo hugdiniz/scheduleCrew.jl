@@ -1,5 +1,3 @@
-abstract Metaheuristic
-
 type TabuSearch <: Metaheuristic
 
 

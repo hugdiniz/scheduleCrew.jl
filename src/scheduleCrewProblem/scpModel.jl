@@ -1,5 +1,3 @@
-abstract Model
-
 type ScheduleCrewModel <: Model
 	data::Dataset
 	edgeCost::Function

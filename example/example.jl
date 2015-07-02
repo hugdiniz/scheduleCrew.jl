@@ -1,3 +1,10 @@
+#including the code
+#cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/src/core")
+include("../src/core/core.jl")
+#cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/src/scheduleCrewProblem/")
+#include("scheduleCrewProblem.jl")
+include("../src/scheduleCrewProblem/scheduleCrewProblem.jl")
+
 cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/example")
 function readDataSet(path)
     return readcsv(path)

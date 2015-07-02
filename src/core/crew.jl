@@ -14,10 +14,10 @@ type Crew
         end
 
         this.addEdge = function addEdge(edge)
-            this.workEdge[Int64(edge[1])] = edge[3]
+            this.workEdge[int(edge[1])] = edge[3]
         end
         this.removeEdge = function removeEdge(edge)
-            this.workEdge[Int64(edge[1])] = 0
+            this.workEdge[int(edge[1])] = 0
         end
         return this
     end

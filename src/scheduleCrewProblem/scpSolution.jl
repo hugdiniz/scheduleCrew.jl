@@ -1,5 +1,3 @@
-abstract Solution
-
 type ScheduleSolution <: Solution
     createInitSolution::Function
     findBestCrew::Function

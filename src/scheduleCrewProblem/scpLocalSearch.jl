@@ -31,6 +31,7 @@ function runMetaheuristic(model,solution)
         else
             i = 1
         end
+	println("Iteration number:",iterationMax)
         iterationMax = iterationMax + 1
     end
 end
