@@ -4,39 +4,40 @@ type LocalSearch <: Metaheuristic
     getBestCrewEdge::Function
     costNewSolution::Function
     model::Model
+    resultsRunMetaheuristc::Array
     function LocalSearch(model::Model)
         this = new()
         this.model = model
+        this.resultsRunMetaheuristc = Array(Int64,model.data.edgeSize())
         this.runMetaheuristic = function runMetaheuristic(solution)
             iterationMax = 1
             i = 1
             edgeSize = model.data.edgeSize()
-            f = open("data.csv","w")
-            while (iterationMax < (edgeSize*10))
+            time = 0
+            while ((iterationMax < (edgeSize*10)) && (time  < 10))
+                tic()
                 edge = model.data.getEdge(i)
                 edgeId = edge[1]
                 ids = getBestCrewEdge(Int64(edgeId),solution)
                 idOldCrew = solution.initSolution[Int64(edgeId),2]
-                if(costNewSolution(solution,edgeId,idOldCrew) > costNewSolution(solution,ids[1],ids[2]))
-                    println(costNewSolution(solution,edgeId,idOldCrew)," > ", costNewSolution(solution,ids[1],ids[2]))
-                    #println("Old solution: ",solution.cost())
-                    #println("Old solution: ",costNewSolution(model,solution,edgeId,solution.initSolution[Int64(edgeId),2]))
 
+                if(costNewSolution(solution,edgeId,idOldCrew) > costNewSolution(solution,ids[1],ids[2]))
                     experiment.solution.setCrewId(ids[1],ids[2])
-                    #println("New solution: ",solution.cost())
-                    println(costNewSolution(solution,ids[1],ids[2]))
-                    write(f,costNewSolution(solution,ids[1],ids[2]))
-                    write(f,"\n")
+                    this.resultsRunMetaheuristc[iterationMax] = solution.cost()
                 end
                 if(edgeSize > i)
                     i = i + 1
                 else
                     i = 1
                 end
-            println("Iteration number:",iterationMax)
+
+                println("Iteration number:",iterationMax)
                 iterationMax = iterationMax + 1
+                timeClock = (toq()) / 60
+                time = timeClock + time
+                println("time = ",time)
             end
-            close(f)
+            println("End")
         end
 
         this.getBestCrewEdge = function getBestCrewEdge(edgeId,solution)
@@ -70,7 +71,7 @@ type LocalSearch <: Metaheuristic
                 end
 
                 edge = model.data.getEdge(Int64(edgeSolution[1]))
-                sumEdgeCost = sumEdgeCost + solution.model.edgeCost(edge,crew)
+                sumEdgeCost = sumEdgeCost + solution.model.edgeCost(solution,edge,crew)
             end
             return sumEdgeCost
         end

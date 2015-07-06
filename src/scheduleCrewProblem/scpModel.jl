@@ -8,9 +8,7 @@ type ScheduleCrewModel <: Model
 		this = new()
         this.data = data
         this.staticVars = staticVars
-        this.edgeCost = function realEdgeCost(edge,crew::Crew)
-           return edgeCost(this,edge,crew)
-        end
+        this.edgeCost = edgeCost
         this.crews = Array(Crew, numberCrews)
         if (crews == null)
             for i = 1:numberCrews
