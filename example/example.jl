@@ -1,22 +1,25 @@
-#including the code
-#cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/src/core")
+#Including core and scheduleCrewProblem
 include("../src/core/core.jl")
-#cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/src/scheduleCrewProblem/")
-#include("scheduleCrewProblem.jl")
 include("../src/scheduleCrewProblem/scheduleCrewProblem.jl")
-
 cd("/home/hugdiniz/Work/Workspace/scheduleCrew.jl/example")
 
+#Reading dataset
 function readDataSet(path)
     return readcsv(path)
 end
 
-dataMatrix = readDataSet("datasetModified/datasetModifiedMin3.csv")
+dataMatrix = readDataSet("datasetModified/datasetModifiedMin2.csv")
 dataset = Dataset(dataMatrix)
-numberCrews= 40
+#end -- Reading dataset
+
+# Setting staticVars
+numberCrews= 5
 requiredPenalty = 100000
 limitConsectuiveMinutes = 720
 extraMinutesCost = 2
+#end Setting staticVars
+
+#CostFunction
 function edgeCost(solution,edge,crew::Crew)
 
     model = solution.model
@@ -40,19 +43,34 @@ function edgeCost(solution,edge,crew::Crew)
 
     return cost
 end
+#End -- CostFunction
 
-staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost)
-model = ScheduleCrewModel(edgeCost,dataset,staticVars)
-tabuSearch = TabuSearch()
-scheduleSolution = ScheduleSolution()
 
-experiment = Experiment(scheduleSolution,tabuSearch,model)
 
-es = experiment.runExperiment()
-experiment.solution.cost()
-#ids = getBestCrewEdge(model,1,experiment.solution)
-#println("first:",initSolution[ids[1],:])
-#experiment.solution.setCrewId(ids[1],ids[2])
-#println("second:",initSolution[ids[1],:])
-#localSearch = LocalSearch(model)
-#localSearch.runMetaheuristic(experiment.solution)
+
+function runLocalSearch()
+  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost)
+  model = ScheduleCrewModel(edgeCost,dataset,staticVars)
+
+  localSearch = LocalSearch(model,1000,true)
+  scheduleSolution = ScheduleSolution()
+
+  experiment = Experiment(scheduleSolution,localSearch,model)
+
+  solution = experiment.runExperiment()
+  return solution.cost()
+end
+
+function runTabuSearch()
+  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost)
+  model = ScheduleCrewModel(edgeCost,dataset,staticVars)
+
+  tabuSearch = TabuSearch(model,1000,true)
+  scheduleSolution = ScheduleSolution()
+
+  experiment = Experiment(scheduleSolution,tabuSearch,model)
+
+  solution = experiment.runExperiment()
+  return solution.cost()
+end
+

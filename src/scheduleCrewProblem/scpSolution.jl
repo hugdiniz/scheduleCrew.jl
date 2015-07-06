@@ -99,4 +99,11 @@ type ScheduleSolution <: Solution
         return this
     end
 
+  function ScheduleSolution(model::Model,initSolution)
+      this = ScheduleSolution()
+      this.model = model
+      this.initSolution = initSolution
+      return this
+  end
+
 end
