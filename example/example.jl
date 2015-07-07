@@ -13,10 +13,11 @@ dataset = Dataset(dataMatrix)
 #end -- Reading dataset
 
 # Setting staticVars
-numberCrews= 5
+numberCrews= 20
 requiredPenalty = 100000
 limitConsectuiveMinutes = 720
 extraMinutesCost = 2
+custForCrews = 100
 #end Setting staticVars
 
 #CostFunction
@@ -49,7 +50,7 @@ end
 
 
 function runLocalSearch()
-  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost)
+  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
   model = ScheduleCrewModel(edgeCost,dataset,staticVars)
 
   localSearch = LocalSearch(model,1000,true)
@@ -62,7 +63,7 @@ function runLocalSearch()
 end
 
 function runTabuSearch()
-  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost)
+  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
   model = ScheduleCrewModel(edgeCost,dataset,staticVars)
 
   tabuSearch = TabuSearch(model,1000,true)
@@ -73,4 +74,15 @@ function runTabuSearch()
   solution = experiment.runExperiment()
   return solution.cost()
 end
+
+function test()
+       include("example.jl")
+       println(runLocalSearch())
+       println(experiment.metaheuristic.resultsRunMetaheuristc) #Alter for plot
+
+       include("example.jl")
+       println(runTabuSearch())
+       println(experiment.metaheuristic.resultsRunMetaheuristc) #Alter for plot
+end
+
 

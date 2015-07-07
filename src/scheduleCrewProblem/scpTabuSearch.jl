@@ -76,7 +76,8 @@ type TabuSearch <: Metaheuristic
                 for i=1:this.tabuList[1][:,2]
                     if(initSolution[:,2] == this.tabuList[i][:,2])
                         return true
-                        break;
+                        println("Tabu")
+                        break
                     end
                 end
                 return false

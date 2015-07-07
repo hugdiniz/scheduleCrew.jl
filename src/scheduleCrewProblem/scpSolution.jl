@@ -62,6 +62,8 @@ type ScheduleSolution <: Solution
                 sumEdgeCost = sumEdgeCost + this.model.edgeCost(this,edge,crew)
 
             end
+            uniqueCrew = unique(this.initSolution[:,2])
+            sumEdgeCost = sumEdgeCost + (length(uniqueCrew) * this.model.staticVars.costForCrew)
             return sumEdgeCost
         end
 
