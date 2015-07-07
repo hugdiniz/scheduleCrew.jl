@@ -1,5 +1,5 @@
 type Experiment
-	solution::Solution
+	  solution::Solution
     runExperiment::Function
     model::Model
     metaheuristic::Metaheuristic
