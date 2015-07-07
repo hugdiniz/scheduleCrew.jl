@@ -10,7 +10,7 @@ type Experiment
         this.metaheuristic = metaheuristic
         this.runExperiment = function runExperiment()
           solution.initSolution = solution.createInitSolution(model)
-          metaheuristic.runMetaheuristic(solution)
+          solution = metaheuristic.runMetaheuristic(solution)
           return solution
         end
 		return this

@@ -66,34 +66,7 @@ type ScheduleSolution <: Solution
         end
 
         this.setCrewId = function setCrewId(edgeId,crewId)
-
             this.initSolution[edgeId,2] = crewId
-            #for i=1:length(this.initSolution[:,1])
-            #    id = this.initSolution[i,1]
-            #    if(edgeId == id)
-            #        edge = dataset.getEdge(edgeId)
-            #        oldIdCrew = this.initSolution[i,2]
-            #        println("OldId Before: ",oldIdCrew)
-            #        model.crews[oldIdCrew].removeEdge(edge)
-            #        println("newId Before: ",crewId)
-            #        model.crews[crewId].addEdge(edge)
-            #        model.crews[crewId].vertex = edge[3]
-
-                    #oldIdCrew = this.initSolution[i,2]
-                    #println("WorkTime: ",(edge[5] - edge[4]))
-                    #println("OldId Before: ",model.crews[oldIdCrew].workTimes)
-                    #model.crews[oldIdCrew].workTimes = model.crews[oldIdCrew].workTimes - (edge[5] - edge[4])
-                    #println("OldId After:",model.crews[oldIdCrew].workTimes)
-                    #adding bestCrew in soluction
-                    #this.initSolution[i,2] = crewId
-                    #println("newId Before: ",model.crews[crewId].workTimes)
-                    #model.crews[crewId].workTimes = model.crews[crewId].workTimes +(edge[5] - edge[4])
-                    #println("newId After:",model.crews[crewId].workTimes)
-                    #model.crews[crewId].vertex = edge[3]
-             #       break
-             #   end
-            #end
-
         end
 
         return this
