@@ -68,6 +68,9 @@ type TabuSearch <: Metaheuristic
             end
             solution = bestSolution
             println("Ending tabuSearch")
+            println("Iteration number:",iterationNumber)
+            println("time = ",time)
+            println("Cost = ",solution.cost())
             return solution
         end
 

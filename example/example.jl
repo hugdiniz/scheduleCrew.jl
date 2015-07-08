@@ -37,7 +37,7 @@ function edgeCost(solution,edge,crew::Crew)
             lastEdge = model.data.getEdge(workEdge[index])
             if  lastEdge[3] != edge[2]
                 cost = cost + model.staticVars.requiredPenalty
-               # println("Erro: ",lastEdge[3]," != ",edge[2])
+                # println("Erro: ",lastEdge[3]," != ",edge[2])
             end
         end
     end
@@ -47,42 +47,36 @@ end
 #End -- CostFunction
 
 
-
+experiment = null
 
 function runLocalSearch()
-  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
-  model = ScheduleCrewModel(edgeCost,dataset,staticVars)
+    staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
+    model = ScheduleCrewModel(edgeCost,dataset,staticVars)
 
-  localSearch = LocalSearch(model,1000,true)
-  scheduleSolution = ScheduleSolution()
+    localSearch = LocalSearch(model,1000,false)
+    scheduleSolution = ScheduleSolution()
 
-  experiment = Experiment(scheduleSolution,localSearch,model)
+    experiment = Experiment(scheduleSolution,localSearch,model)
 
-  solution = experiment.runExperiment()
-  return solution.cost()
+    solution = experiment.runExperiment()
+    return experiment
 end
 
 function runTabuSearch()
-  staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
-  model = ScheduleCrewModel(edgeCost,dataset,staticVars)
+    staticVars = StaticVars(numberCrews,requiredPenalty,limitConsectuiveMinutes,extraMinutesCost,custForCrews)
+    model = ScheduleCrewModel(edgeCost,dataset,staticVars)
 
-  tabuSearch = TabuSearch(model,1000,true)
-  scheduleSolution = ScheduleSolution()
+    tabuSearch = TabuSearch(model,1000,false)
+    scheduleSolution = ScheduleSolution()
 
-  experiment = Experiment(scheduleSolution,tabuSearch,model)
+    experiment = Experiment(scheduleSolution,tabuSearch,model)
 
-  solution = experiment.runExperiment()
-  return solution.cost()
-end
-
-function test()
-       include("example.jl")
-       println(runLocalSearch())
-       println(experiment.metaheuristic.resultsRunMetaheuristc) #Alter for plot
-
-       include("example.jl")
-       println(runTabuSearch())
-       println(experiment.metaheuristic.resultsRunMetaheuristc) #Alter for plot
+    solution = experiment.runExperiment()
+    return experiment
 end
 
 
+
+
+experiment1 = runLocalSearch()
+experiment2 = runTabuSearch()

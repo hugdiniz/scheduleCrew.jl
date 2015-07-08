@@ -49,7 +49,12 @@ type LocalSearch <: Metaheuristic
 
                 iterationNumber = iterationNumber + 1
             end
+
             println("Ending LocalSearch")
+            println("Iteration number:",iterationNumber)
+            println("time = ",time)
+            println("Cost = ",solution.cost())
+
             return solution
         end
 
