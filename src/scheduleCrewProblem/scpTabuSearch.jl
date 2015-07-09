@@ -21,7 +21,7 @@ type TabuSearch <: Metaheuristic
             time = 0
             bestSolution = ScheduleSolution(model,solution.initSolution)
 
-            while ((iterationNumber < numberMaxIterations) && (time  < 10))
+            while ((iterationNumber < numberMaxIterations) && (time  < 20))
                 tic()
                 edge = model.data.getEdge(i)
                 edgeId = edge[1]

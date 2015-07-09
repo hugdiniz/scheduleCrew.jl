@@ -15,7 +15,7 @@ type LocalSearch <: Metaheuristic
             edgeSize = model.data.edgeSize()
             time =
                 iterationNotBetter = 1
-            while ((iterationNumber < numberMaxIterations) && (time  < 10))
+            while ((iterationNumber < numberMaxIterations) && (time  < 20))
                 tic()
                 edge = model.data.getEdge(i)
                 edgeId = edge[1]

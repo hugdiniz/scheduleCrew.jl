@@ -8,12 +8,12 @@ function readDataSet(path)
     return readcsv(path)
 end
 
-dataMatrix = readDataSet("datasetModified/datasetModifiedMin2.csv")
+dataMatrix = readDataSet("datasetModified/datasetModifiedMin3.csv")
 dataset = Dataset(dataMatrix)
 #end -- Reading dataset
 
 # Setting staticVars
-numberCrews= 20
+numberCrews= 30
 requiredPenalty = 100000
 limitConsectuiveMinutes = 720
 extraMinutesCost = 2
